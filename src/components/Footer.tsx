@@ -4,6 +4,7 @@ import { footerContent } from "@/data/content";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   const { toast } = useToast();
@@ -37,10 +38,11 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <i className="fas fa-kaaba text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold">{footerContent.brand.name}</span>
+              <img 
+                src={logo} 
+                alt="ITSolutions Logo" 
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
             </div>
             <p className="text-sm text-background/60 mb-6">
               {footerContent.brand.tagline}

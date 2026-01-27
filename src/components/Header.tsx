@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { label: "Solutions", href: "#solutions" },
+  { label: "Packages", href: "#packages" },
   { label: "Process", href: "#process" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "FAQ", href: "#faq" },
@@ -38,18 +40,11 @@ const Header = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href="#" className="flex items-center gap-2 group">
-              <div className={cn(
-                "w-10 h-10 rounded-lg flex items-center justify-center transition-colors",
-                isScrolled ? "bg-primary" : "bg-primary"
-              )}>
-                <i className="fas fa-kaaba text-primary-foreground text-lg" />
-              </div>
-              <span className={cn(
-                "text-xl font-bold transition-colors",
-                isScrolled ? "text-foreground" : "text-foreground"
-              )}>
-                HajjConnect
-              </span>
+              <img 
+                src={logo} 
+                alt="ITSolutions Logo" 
+                className="h-10 w-auto object-contain"
+              />
             </a>
 
             {/* Desktop Navigation */}
@@ -60,7 +55,7 @@ const Header = () => {
                   href={link.href}
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-primary",
-                    isScrolled ? "text-foreground" : "text-foreground"
+                    isScrolled ? "text-foreground" : "text-white"
                   )}
                 >
                   {link.label}
@@ -68,12 +63,8 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* CTA Buttons */}
-            <div className="hidden lg:flex items-center gap-3">
-              <Button variant="ghost" size="sm">
-                <i className="fas fa-phone mr-2" />
-                +234 800 123 4567
-              </Button>
+            {/* CTA Button */}
+            <div className="hidden lg:flex items-center">
               <Button variant="default" size="sm" asChild>
                 <a href="#contact">
                   Get Started
@@ -85,10 +76,17 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-10 h-10 rounded-lg bg-muted flex items-center justify-center"
+              className={cn(
+                "lg:hidden w-10 h-10 rounded-lg flex items-center justify-center",
+                isScrolled ? "bg-muted" : "bg-white/10"
+              )}
               aria-label="Toggle menu"
             >
-              <i className={`fas ${isMobileMenuOpen ? "fa-times" : "fa-bars"}`} />
+              <i className={cn(
+                "fas",
+                isMobileMenuOpen ? "fa-times" : "fa-bars",
+                isScrolled ? "text-foreground" : "text-white"
+              )} />
             </button>
           </div>
         </div>
@@ -128,14 +126,7 @@ const Header = () => {
                   ))}
                 </nav>
 
-                <div className="mt-8 space-y-4">
-                  <a
-                    href="tel:+2348001234567"
-                    className="flex items-center gap-3 text-muted-foreground hover:text-foreground"
-                  >
-                    <i className="fas fa-phone" />
-                    +234 800 123 4567
-                  </a>
+                <div className="mt-8">
                   <Button variant="ctaPrimary" size="lg" className="w-full" asChild>
                     <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
                       Get Started

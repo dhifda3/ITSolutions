@@ -1,4 +1,4 @@
-// Dynamic content data for HajjConnect platform
+// Dynamic content data for ITSolutions platform
 // All content is loaded from here for easy updates
 
 export const heroContent = {
@@ -7,18 +7,13 @@ export const heroContent = {
   features: [
     "No credit card required",
     "Free consultation & proposal",
-    "Setup in 2-4 weeks"
+    "Setup in 7-8 days"
   ],
   cta: {
     primary: {
       text: "Schedule Free Consultation",
       href: "#contact",
       icon: "fa-calendar-check"
-    },
-    secondary: {
-      text: "Call Us Now",
-      href: "tel:+1234567890",
-      icon: "fa-phone"
     }
   }
 };
@@ -38,8 +33,7 @@ export const solutionsContent = {
         "License Tracking",
         "Regulatory Updates",
         "Audit Trails"
-      ],
-      image: "compliance"
+      ]
     },
     {
       id: "network",
@@ -52,8 +46,7 @@ export const solutionsContent = {
         "Resource Sharing",
         "Group Bookings",
         "Knowledge Base"
-      ],
-      image: "network"
+      ]
     },
     {
       id: "bookings",
@@ -66,8 +59,7 @@ export const solutionsContent = {
         "Inventory Management",
         "Payment Tracking",
         "Booking Analytics"
-      ],
-      image: "bookings"
+      ]
     },
     {
       id: "analytics",
@@ -80,8 +72,7 @@ export const solutionsContent = {
         "Custom Reports",
         "Trend Analysis",
         "Performance Metrics"
-      ],
-      image: "analytics"
+      ]
     }
   ]
 };
@@ -93,9 +84,9 @@ export const processContent = {
     {
       number: 1,
       title: "Free Consultation",
-      description: "60-min strategy session with needs assessment and custom proposal tailored to your agency.",
+      description: "30-min strategy session with needs assessment and custom proposal tailored to your agency.",
       icon: "fa-comments",
-      features: ["60-min strategy session", "Needs assessment", "Custom proposal"]
+      features: ["30-min strategy session", "Needs assessment", "Custom proposal"]
     },
     {
       number: 2,
@@ -127,7 +118,7 @@ export const testimonialsContent = {
   testimonials: [
     {
       id: 1,
-      quote: "HajjConnect transformed how we manage our pilgrim bookings. The compliance tracking alone saved us countless hours and helped us avoid regulatory issues.",
+      quote: "ITSolutions transformed how we manage our pilgrim bookings. The compliance tracking alone saved us countless hours and helped us avoid regulatory issues.",
       author: "Ibrahim Musa",
       position: "Operations Director",
       agency: "Al-Baraka Travel & Tours",
@@ -147,7 +138,7 @@ export const testimonialsContent = {
     },
     {
       id: 3,
-      quote: "Implementation was smooth and the support team was exceptional. We were fully operational within 3 weeks.",
+      quote: "Implementation was smooth and the support team was exceptional. We were fully operational within a week.",
       author: "Ahmed Hassan",
       position: "Managing Partner",
       agency: "Noor Travel Services",
@@ -174,15 +165,15 @@ export const faqContent = {
   faqs: [
     {
       question: "How long does implementation take?",
-      answer: "Typical implementation takes 2-4 weeks depending on your agency's size and customization requirements. We work closely with your team to ensure minimal disruption to your operations."
+      answer: "Typical implementation takes 7-8 days depending on your agency's size and customization requirements. We work closely with your team to ensure minimal disruption to your operations."
     },
     {
-      question: "Is my data secure with HajjConnect?",
+      question: "Is my data secure with ITSolutions?",
       answer: "Absolutely. We use enterprise-grade security including SSL encryption, secure cloud hosting, and regular security audits. Your data is protected 24/7 and we're fully compliant with international data protection standards."
     },
     {
       question: "Can I integrate with my existing systems?",
-      answer: "Yes! HajjConnect is built with integration in mind. We support connections to major payment gateways, email services, and can work with your existing booking systems through our API."
+      answer: "Yes! ITSolutions is built with integration in mind. We support connections to major payment gateways, email services, and can work with your existing booking systems through our API."
     },
     {
       question: "What kind of support do you offer?",
@@ -197,6 +188,116 @@ export const faqContent = {
       answer: "Yes, you can add unlimited team members with role-based access controls. Assign different permissions for managers, booking agents, and administrators."
     }
   ]
+};
+
+export const packagesContent = {
+  title: "Choose Your Perfect Package",
+  subtitle: "Flexible solutions designed to grow with your agency",
+  packages: [
+    {
+      id: "starter",
+      name: "Starter Package",
+      tagline: "Perfect for Small/New Agencies",
+      description: "Launch your digital presence with essential tools designed for agencies starting their journey.",
+      icon: "fa-seedling",
+      features: [
+        "Basic Website (5 pages)",
+        "Logo/Branding Refresh",
+        "Basic Wakeel Consultation"
+      ],
+      cta: {
+        text: "Get Started",
+        href: "#contact"
+      },
+      highlighted: false
+    },
+    {
+      id: "growth",
+      name: "Growth Package",
+      tagline: "For Established Agencies",
+      description: "Scale your operations with advanced digital tools and comprehensive support for growing agencies.",
+      icon: "fa-chart-line",
+      features: [
+        "Dynamic Website + Booking Engine",
+        "Social Media Setup",
+        "Full Wakeel Representation"
+      ],
+      cta: {
+        text: "Get Started",
+        href: "#contact"
+      },
+      highlighted: true
+    },
+    {
+      id: "premium",
+      name: "Premium Package",
+      tagline: "For Market Leaders",
+      description: "Enterprise-grade solutions with exclusive features for agencies leading their markets.",
+      icon: "fa-crown",
+      features: [
+        "Custom Mobile App",
+        "Advanced SEO",
+        "Dedicated Strategic Account Manager",
+        "Priority KSA Support"
+      ],
+      cta: {
+        text: "Get Started",
+        href: "#contact"
+      },
+      highlighted: false
+    },
+    {
+      id: "custom",
+      name: "Custom Package",
+      tagline: "Tailored to Your Needs",
+      description: "Bespoke solutions crafted specifically for your unique requirements and business goals.",
+      icon: "fa-cog",
+      features: [
+        "Custom pricing based on needs",
+        "Flexible service combinations",
+        "Personalized consultation",
+        "Scalable solutions"
+      ],
+      cta: {
+        text: "Contact Us",
+        href: "#contact"
+      },
+      highlighted: false
+    }
+  ]
+};
+
+export const wakilContent = {
+  title: "Direct Connection to Saudi Arabia",
+  subtitle: "Your Gateway to Seamless Hajj & Umrah Operations",
+  heading: "We Connect You With Authorized Wakeel Representatives",
+  description: "Navigating the complex landscape of Saudi Arabian regulations and partnerships can be challenging. ITSolutions provides you with direct access to authorized Wakeel representatives who act as your trusted local partners in the Kingdom.",
+  benefits: [
+    {
+      icon: "fa-handshake",
+      title: "Official Representation",
+      description: "Get authorized representation with Saudi authorities for all your agency's official procedures and permits."
+    },
+    {
+      icon: "fa-file-contract",
+      title: "Compliance & Contracts",
+      description: "Handle all contracts, permits, and compliance requirements with proper legal backing in Saudi Arabia."
+    },
+    {
+      icon: "fa-hotel",
+      title: "Service Coordination",
+      description: "Coordinate accommodation, transport, and pilgrim services directly with local Saudi providers."
+    },
+    {
+      icon: "fa-headset",
+      title: "Local Support",
+      description: "24/7 local point of contact during pilgrimage seasons for immediate assistance and problem resolution."
+    }
+  ],
+  cta: {
+    text: "Learn More About Wakeel Services",
+    href: "#contact"
+  }
 };
 
 export const contactContent = {
@@ -219,23 +320,24 @@ export const contactContent = {
     { id: "network", label: "Agency Network" },
     { id: "bookings", label: "Booking Management" },
     { id: "analytics", label: "Analytics & Reporting" },
+    { id: "wakeel", label: "Wakeel Services" },
     { id: "custom", label: "Custom Development" }
   ]
 };
 
 export const footerContent = {
   brand: {
-    name: "HajjConnect",
-    tagline: "Empowering agencies across Africa with modern technology for Hajj & Umrah operations.",
+    name: "ITSolutions",
+    tagline: "Digital Services for Umrah & Hajj - Empowering agencies across Africa with modern technology.",
     badges: [
       { icon: "fa-check-circle", text: "Saudi Approved" },
-      { icon: "fa-certificate", text: "ISO Certified" },
       { icon: "fa-shield-halved", text: "Secure Platform" }
     ]
   },
   quickLinks: [
     { label: "About Us", href: "#about" },
     { label: "Solutions", href: "#solutions" },
+    { label: "Packages", href: "#packages" },
     { label: "Process", href: "#process" },
     { label: "Testimonials", href: "#testimonials" },
     { label: "FAQ", href: "#faq" },
@@ -246,19 +348,19 @@ export const footerContent = {
     { label: "Agency Network", href: "#solutions" },
     { label: "Booking System", href: "#solutions" },
     { label: "Analytics", href: "#solutions" },
+    { label: "Wakeel Services", href: "#wakeel" },
     { label: "Custom Development", href: "#contact" }
   ],
   contact: {
-    email: "hello@hajjconnect.com",
+    email: "hello@itsolutions.com",
     phone: "+234 800 123 4567",
     whatsapp: "+234 800 123 4567",
     address: "123 Business District, Lagos, Nigeria"
   },
   social: [
     { icon: "fa-linkedin", href: "#", label: "LinkedIn" },
-    { icon: "fa-twitter", href: "#", label: "Twitter" },
+    { icon: "fa-x-twitter", href: "#", label: "X" },
     { icon: "fa-facebook", href: "#", label: "Facebook" },
-    { icon: "fa-instagram", href: "#", label: "Instagram" },
     { icon: "fa-whatsapp", href: "#", label: "WhatsApp" }
   ],
   legal: [

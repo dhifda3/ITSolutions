@@ -55,96 +55,41 @@ const SolutionsSection = () => {
           ))}
         </motion.div>
 
-        {/* Tab Content */}
+        {/* Tab Content - Text Only */}
         <motion.div
           key={activeTab}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="grid lg:grid-cols-2 gap-12 items-center"
+          className="max-w-3xl mx-auto"
         >
-          {/* Content Side */}
-          <div className="order-2 lg:order-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <i className={`fas ${activeTabData.icon} text-xl text-primary`} />
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+                <i className={`fas ${activeTabData.icon} text-2xl text-primary`} />
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
-                {activeTabData.title}
-              </h3>
             </div>
-            
-            <p className="text-muted-foreground text-lg mb-8">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+              {activeTabData.title}
+            </h3>
+            <p className="text-muted-foreground text-lg">
               {activeTabData.description}
             </p>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              {activeTabData.features.map((feature, index) => (
-                <motion.div
-                  key={feature}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-muted/50 border border-border"
-                >
-                  <i className="fas fa-check-circle text-primary" />
-                  <span className="font-medium">{feature}</span>
-                </motion.div>
-              ))}
-            </div>
           </div>
 
-          {/* Visual Side */}
-          <div className="order-1 lg:order-2">
-            <div className="relative">
-              {/* Main Card */}
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-border overflow-hidden relative">
-                <div className="absolute inset-0 pattern-grid opacity-30" />
-                
-                {/* Floating Elements */}
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-8 left-8 bg-white rounded-xl shadow-lg p-4"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <i className={`fas ${activeTabData.icon} text-primary`} />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold">{activeTabData.label}</div>
-                      <div className="text-xs text-muted-foreground">Active</div>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute bottom-8 right-8 bg-white rounded-xl shadow-lg p-4"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center">
-                      <i className="fas fa-chart-line text-accent text-sm" />
-                    </div>
-                    <div>
-                      <div className="text-lg font-bold text-primary">+47%</div>
-                      <div className="text-xs text-muted-foreground">Efficiency</div>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Center Icon */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-24 h-24 rounded-2xl bg-white shadow-xl flex items-center justify-center">
-                    <i className={`fas ${activeTabData.icon} text-4xl text-primary`} />
-                  </div>
-                </div>
-              </div>
-
-              {/* Decorative Blur */}
-              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-primary/20 rounded-full blur-3xl" />
-            </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {activeTabData.features.map((feature, index) => (
+              <motion.div
+                key={feature}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className="flex items-center gap-3 p-4 rounded-xl bg-muted/50 border border-border"
+              >
+                <i className="fas fa-check-circle text-primary" />
+                <span className="font-medium">{feature}</span>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>
