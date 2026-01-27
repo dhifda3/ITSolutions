@@ -1,18 +1,25 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { testimonialsContent } from "@/data/content";
 import { cn } from "@/lib/utils";
 
 const TestimonialsSection = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const { testimonials } = testimonialsContent;
+  const [currentPage, setCurrentPage] = useState(0);
+  const testimonialsPerPage = 3;
+  const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
 
-  const nextTestimonial = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  const getCurrentTestimonials = () => {
+    const start = currentPage * testimonialsPerPage;
+    return testimonials.slice(start, start + testimonialsPerPage);
   };
 
-  const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  const nextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
   return (
@@ -38,32 +45,32 @@ const TestimonialsSection = () => {
           </p>
         </motion.div>
 
-        {/* Testimonial Cards */}
-        <div className="relative max-w-4xl mx-auto">
-          <AnimatePresence mode="wait">
+        {/* Testimonial Cards Grid - 3 at once */}
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          {getCurrentTestimonials().map((testimonial, index) => (
             <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.4 }}
-              className="bg-primary-foreground/10 backdrop-blur-lg rounded-3xl p-8 sm:p-12 border border-primary-foreground/20"
+              key={testimonial.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="bg-primary-foreground/10 backdrop-blur-lg rounded-2xl p-6 border border-primary-foreground/20 flex flex-col h-full"
             >
-              {testimonials[activeIndex].featured && (
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6">
+              {testimonial.featured && (
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium mb-4 w-fit">
                   <i className="fas fa-crown" />
-                  Featured Review
+                  Featured
                 </div>
               )}
 
               {/* Rating */}
-              <div className="flex gap-1 mb-6">
+              <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <i
                     key={i}
                     className={cn(
-                      "fas fa-star",
-                      i < testimonials[activeIndex].rating
+                      "fas fa-star text-sm",
+                      i < testimonial.rating
                         ? "text-accent"
                         : "text-primary-foreground/30"
                     )}
@@ -72,65 +79,67 @@ const TestimonialsSection = () => {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-xl sm:text-2xl lg:text-3xl font-medium leading-relaxed mb-8">
-                "{testimonials[activeIndex].quote}"
+              <blockquote className="text-base leading-relaxed mb-6 flex-grow">
+                "{testimonial.quote}"
               </blockquote>
 
               {/* Author */}
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-primary-foreground/20 flex items-center justify-center text-xl font-bold">
-                  {testimonials[activeIndex].author.split(' ').map(n => n[0]).join('')}
+              <div className="flex items-center gap-3 mt-auto">
+                <div className="w-10 h-10 rounded-full bg-primary-foreground/20 flex items-center justify-center text-sm font-bold">
+                  {testimonial.author.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
-                  <div className="font-bold text-lg">{testimonials[activeIndex].author}</div>
-                  <div className="text-primary-foreground/70">
-                    {testimonials[activeIndex].position}, {testimonials[activeIndex].agency}
+                  <div className="font-semibold text-sm">{testimonial.author}</div>
+                  <div className="text-xs text-primary-foreground/70">
+                    {testimonial.position}, {testimonial.agency}
                   </div>
-                  <div className="text-sm text-primary-foreground/50 flex items-center gap-1 mt-1">
+                  <div className="text-xs text-primary-foreground/50 flex items-center gap-1 mt-0.5">
                     <i className="fas fa-map-marker-alt" />
-                    {testimonials[activeIndex].location}
+                    {testimonial.location}
                   </div>
                 </div>
               </div>
             </motion.div>
-          </AnimatePresence>
+          ))}
+        </div>
 
-          {/* Navigation */}
-          <div className="flex justify-center items-center gap-4 mt-8">
+        {/* Navigation */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-4">
             <button
-              onClick={prevTestimonial}
-              className="w-12 h-12 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors"
-              aria-label="Previous testimonial"
+              onClick={prevPage}
+              className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors"
+              aria-label="Previous testimonials"
             >
               <i className="fas fa-chevron-left" />
             </button>
 
             {/* Dots */}
             <div className="flex gap-2">
-              {testimonials.map((_, index) => (
+              {[...Array(totalPages)].map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => setCurrentPage(index)}
                   className={cn(
                     "w-2 h-2 rounded-full transition-all duration-300",
-                    index === activeIndex
+                    index === currentPage
                       ? "w-8 bg-accent"
                       : "bg-primary-foreground/30 hover:bg-primary-foreground/50"
                   )}
-                  aria-label={`Go to testimonial ${index + 1}`}
+                  aria-label={`Go to page ${index + 1}`}
                 />
               ))}
             </div>
 
             <button
-              onClick={nextTestimonial}
-              className="w-12 h-12 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors"
-              aria-label="Next testimonial"
+              onClick={nextPage}
+              className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors"
+              aria-label="Next testimonials"
             >
               <i className="fas fa-chevron-right" />
             </button>
           </div>
-        </div>
+        )}
 
         {/* Client Logos Placeholder */}
         <motion.div

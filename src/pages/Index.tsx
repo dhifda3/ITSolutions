@@ -2,6 +2,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import SolutionsSection from "@/components/SolutionsSection";
+import PackagesSection from "@/components/PackagesSection";
+import WakilSection from "@/components/WakilSection";
 import ProcessSection from "@/components/ProcessSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
@@ -17,6 +19,8 @@ const Index = () => {
       <main>
         <HeroSection />
         <SolutionsSection />
+        <PackagesSection />
+        <WakilSection />
         <ProcessSection />
         <TestimonialsSection />
         <FAQSection />

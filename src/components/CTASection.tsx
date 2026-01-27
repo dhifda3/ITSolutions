@@ -44,24 +44,18 @@ const CTASection = () => {
             ))}
           </div>
 
-          {/* CTA Buttons */}
+          {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex justify-center"
           >
             <Button variant="gold" size="xl" asChild>
               <a href="#contact">
                 <i className="fas fa-calendar-check" />
                 {heroContent.cta.primary.text}
-              </a>
-            </Button>
-            <Button variant="glass" size="xl" asChild>
-              <a href={heroContent.cta.secondary.href}>
-                <i className="fas fa-phone" />
-                {heroContent.cta.secondary.text}
               </a>
             </Button>
           </motion.div>
