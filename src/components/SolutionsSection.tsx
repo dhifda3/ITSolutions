@@ -8,7 +8,7 @@ const SolutionsSection = () => {
   const activeTabData = solutionsContent.tabs.find(tab => tab.id === activeTab)!;
 
   return (
-    <section id="solutions" className="section-padding bg-background">
+    <section id="solutions" className="section-padding bg-accent-ivory">
       <div className="container-custom">
         {/* Header */}
         <motion.div
