@@ -152,11 +152,52 @@ export const testimonialsContent = {
       position: "Business Development Manager",
       agency: "Hidaya Travel Group",
       location: "Accra, Ghana",
+      rating: 4,
+      featured: false
+    },
+    {
+      id: 5,
+      quote: "With ITSolutions, we reduced booking errors by 40% and improved customer satisfaction. Truly a game changer for our team.",
+      author: "Samuel Tetteh",
+      position: "CEO",
+      agency: "Safa Pilgrims Ltd",
+      location: "Accra, Ghana",
+      rating: 3,
+      featured: false
+    },
+    {
+      id: 6,
+      quote: "Their real-time reporting and compliance tools saved us from several potential regulatory issues. Highly recommended.",
+      author: "Leila Ahmed",
+      position: "Operations Manager",
+      agency: "Al-Mustafa Travel",
+      location: "Khartoum, Sudan",
       rating: 5,
+      featured: false
+    },
+    {
+      id: 7,
+      quote: "The onboarding was seamless, and the support team guided us every step of the way. Our agency efficiency has doubled.",
+      author: "Mohamed Idris",
+      position: "General Manager",
+      agency: "Safwa Hajj & Umrah",
+      location: "Mogadishu, Somalia",
+      rating: 5,
+      featured: false
+    },
+    {
+      id: 8,
+      quote: "ITSolutions has empowered our team to serve pilgrims better and faster. Our booking accuracy and customer feedback scores have never been higher.",
+      author: "Hawa Diallo",
+      position: "Director of Operations",
+      agency: "Baraka Travels",
+      location: "Bamako, Mali",
+      rating: 4,
       featured: false
     }
   ]
 };
+
 
 export const faqContent = {
   title: "Got Questions? We've Got Answers",
