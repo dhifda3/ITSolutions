@@ -47,8 +47,6 @@ const ProcessSection = () => {
                       <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl shadow-lg">
                         {step.number}
                       </div>
-                      {/* Connector dot for desktop */}
-                      <div className="hidden lg:block absolute -bottom-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary" />
                     </div>
                     <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
                       <i className={`fas ${step.icon} text-xl text-accent`} />

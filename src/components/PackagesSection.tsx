@@ -3,9 +3,12 @@ import { packagesContent } from "@/data/content";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+
 const PackagesSection = () => {
   return (
-    <section id="packages" className="section-padding bg-muted/30">
+    <section id="packages" className="section-padding bg-[#F8F5EE] relative">
+
+      {/* Content */}
       <div className="container-custom">
         {/* Header */}
         <motion.div

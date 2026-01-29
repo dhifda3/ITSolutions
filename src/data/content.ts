@@ -6,8 +6,7 @@ export const heroContent = {
   subheading: "Join 50+ agencies already growing with our platform. Get started today with a free consultation and custom proposal.",
   features: [
     "No credit card required",
-    "Free consultation & proposal",
-    "Setup in 7-8 days"
+    "Free consultation & proposal"
   ],
   cta: {
     primary: {
