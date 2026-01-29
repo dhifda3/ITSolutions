@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
@@ -14,36 +13,20 @@ const navLinks = [
 ];
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <>
-      <header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "bg-background/95 backdrop-blur-lg shadow-md py-3"
-            : "bg-transparent py-5"
-        )}
-      >
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md py-0">
         <div className="container-custom">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2 group">
-              <img 
-                src={logo} 
-                alt="ITSolutions Logo" 
-                className="h-10 w-auto object-contain"
+            <a href="#" className="flex items-center">
+              <img
+                src={logo}
+                alt="ITSolutions Logo"
+                className="h-20 w-auto object-contain"
               />
             </a>
 
@@ -53,10 +36,7 @@ const Header = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={cn(
-                    "text-sm font-medium transition-colors hover:text-primary",
-                    isScrolled ? "text-foreground" : "text-white"
-                  )}
+                  className="text-sm font-medium text-foreground transition-colors hover:text-primary"
                 >
                   {link.label}
                 </a>
@@ -76,17 +56,16 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={cn(
-                "lg:hidden w-10 h-10 rounded-lg flex items-center justify-center",
-                isScrolled ? "bg-muted" : "bg-white/10"
-              )}
+              className="lg:hidden w-10 h-10 rounded-lg flex items-center justify-center bg-muted"
               aria-label="Toggle menu"
             >
-              <i className={cn(
-                "fas",
-                isMobileMenuOpen ? "fa-times" : "fa-bars",
-                isScrolled ? "text-foreground" : "text-white"
-              )} />
+              <i
+                className={`
+                  fas 
+                  ${isMobileMenuOpen ? "fa-times" : "fa-bars"} 
+                  text-foreground
+                `}
+              />
             </button>
           </div>
         </div>
@@ -96,21 +75,24 @@ const Header = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 lg:hidden"
           >
+            {/* Backdrop */}
             <div
-              className="absolute inset-0 bg-foreground/20 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/20"
               onClick={() => setIsMobileMenuOpen(false)}
             />
+
+            {/* Drawer */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25 }}
-              className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-background shadow-xl"
+              className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-white shadow-xl"
             >
               <div className="p-6 pt-20">
                 <nav className="space-y-4">
@@ -127,8 +109,16 @@ const Header = () => {
                 </nav>
 
                 <div className="mt-8">
-                  <Button variant="ctaPrimary" size="lg" className="w-full" asChild>
-                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="ctaPrimary"
+                    size="lg"
+                    className="w-full"
+                    asChild
+                  >
+                    <a
+                      href="#contact"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
                       Get Started
                       <i className="fas fa-arrow-right ml-2" />
                     </a>

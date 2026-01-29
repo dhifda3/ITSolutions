@@ -19,7 +19,6 @@ interface FormData {
   agencySize: string;
   services: string[];
   message: string;
-  agreement: boolean;
 }
 
 const ContactSection = () => {
@@ -34,8 +33,7 @@ const ContactSection = () => {
     country: "",
     agencySize: "",
     services: [],
-    message: "",
-    agreement: false
+    message: ""
   });
 
   const handleInputChange = (field: keyof FormData, value: string | boolean | string[]) => {
@@ -58,8 +56,7 @@ const ContactSection = () => {
       !formData.agencyName ||
       !formData.contactPerson ||
       !formData.email ||
-      !formData.phone ||
-      !formData.agreement
+      !formData.phone 
     ) {
       toast({
         title: "Please fill in all required fields",
@@ -126,8 +123,7 @@ const ContactSection = () => {
       country: "",
       agencySize: "",
       services: [],
-      message: "",
-      agreement: false
+      message: ""
     });
     setIsSubmitted(false);
   };
