@@ -21,7 +21,7 @@ const FloatingButtons = () => {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
       {/* WhatsApp Button */}
       <motion.a
-        href="https://wa.me/2348001234567"
+        href="https://wa.me/966565809269"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0 }}

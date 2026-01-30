@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <>
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md py-0">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#F5F7EA] shadow-md py-0">
         <div className="container-custom">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -26,7 +26,7 @@ const Header = () => {
               <img
                 src={logo}
                 alt="ITSolutions Logo"
-                className="h-20 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </a>
 
