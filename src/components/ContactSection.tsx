@@ -224,9 +224,9 @@ const ContactSection = () => {
                   <i className="fab fa-whatsapp" />
                   <span>WhatsApp Chat</span>
                 </a>
-                <a href="mailto:tempemail.a50@gmail.com" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <a className="flex items-center gap-3">
                   <i className="fas fa-envelope" />
-                  <span>itsolutions@gmail.com</span>
+                  <span>itsolutionglobal59@gmail.com</span>
                 </a>
               </div>
             </div>
