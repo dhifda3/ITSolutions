@@ -30,6 +30,9 @@
     --muted: 160 20% 96%;
     --muted-foreground: 160 10% 45%;
 
+    --accent-ivory: 60 33% 94%;
+    --accent-ivory-foreground: 160 30% 10%;
+
     /* Accent - Warm Gold */
     --accent: 40 90% 50%;
     --accent-foreground: 160 30% 10%;
@@ -102,6 +105,10 @@
 
     --muted: 160 25% 15%;
     --muted-foreground: 160 10% 60%;
+
+    --accent-ivory: 60 33% 94%;
+    --accent-ivory-foreground: 160 30% 6%;
+
 
     --accent: 40 85% 55%;
     --accent-foreground: 160 30% 6%;

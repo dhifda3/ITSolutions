@@ -80,8 +80,8 @@ const ContactSection = () => {
   
     try {
       await emailjs.send(
-        "service_9tsfqda",
-        "template_z32ir0v",
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           agency_name: formData.agencyName,
           contact_person: formData.contactPerson,
@@ -92,7 +92,7 @@ const ContactSection = () => {
           services: formData.services.join(", "),
           message: formData.message,
         },
-        "3JoEdq7oWNDikmV7E"
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
   
       setIsSubmitted(true);
