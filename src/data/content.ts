@@ -344,13 +344,13 @@ export const contactContent = {
   title: "Start Your Transformation Today",
   subtitle: "Fill out the form and our team will reach out within 24 hours",
   countries: [
-    "Nigeria", "Senegal", "Kenya", "Ghana", "South Africa", "Egypt", 
+    "Nigeria", "Senegal", "Kenya", "Ghana", "South Africa", "Egypt",
     "Morocco", "Tanzania", "Ethiopia", "Uganda", "Cameroon", "Ivory Coast",
     "Mali", "Niger", "Sudan", "Other"
   ],
   agencySizes: [
     "1-5 employees",
-    "6-15 employees", 
+    "6-15 employees",
     "16-50 employees",
     "51-100 employees",
     "100+ employees"
