@@ -25,7 +25,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-6xl sm:text-7xl lg:text-8xl font-extrabold text-white leading-tight mb-4"
+              className="text-4xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-tight mb-4"
             >
               <span className="block">
                 Ready To{" "}
