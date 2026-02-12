@@ -20,7 +20,7 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
 
           {/* LEFT – TEXT (leans left) */}
-          <div className="lg:pr-16">
+          <div className="lg:pr-16 flex flex-col items-center text-center lg:items-start lg:text-left">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -39,12 +39,12 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-2xl text-white max-w-2xl mb-6 leading-relaxed"
+              className="text-2xl text-white max-w-2xl mb-6 leading-relaxed mx-auto lg:mx-0"
             >
               {heroContent.subheading}
             </motion.p>
 
-            <div className="flex flex-wrap gap-4 mb-8">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
               {heroContent.features.map((feature, index) => (
                 <div
                   key={index}
@@ -68,7 +68,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="ml-auto max-w-md w-full rounded-2xl bg-white/10 border border-white/20 p-8 text-white backdrop-blur"
+            className="mx-auto lg:ml-auto max-w-md w-full rounded-2xl bg-white/10 border border-white/20 p-8 text-white backdrop-blur"
           >
             <div className="grid grid-cols-2 gap-6 text-center">
               <div>

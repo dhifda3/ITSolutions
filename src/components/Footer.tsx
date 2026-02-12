@@ -12,7 +12,7 @@ const Footer = () => {
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast({
@@ -36,20 +36,20 @@ const Footer = () => {
         {/* Main Footer Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-12 border-b border-background/10">
           {/* Brand Column */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="flex items-center gap-2 mb-4">
-              <img 
-                src={logo} 
-                alt="ITSolutions Logo" 
+              <img
+                src={logo}
+                alt="ITSolutions Logo"
                 className="h-10 w-auto object-contain brightness-0 invert"
               />
             </div>
             <p className="text-sm text-background/60 mb-6">
               {footerContent.brand.tagline}
             </p>
-            
+
             {/* Badges */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2">
               {footerContent.brand.badges.map((badge, i) => (
                 <div
                   key={i}
@@ -63,7 +63,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="text-center lg:text-left">
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {footerContent.quickLinks.map((link, i) => (
@@ -80,7 +80,7 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="text-center lg:text-left">
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
               {footerContent.services.map((link, i) => (
@@ -97,12 +97,12 @@ const Footer = () => {
           </div>
 
           {/* Newsletter */}
-          <div>
+          <div className="text-center lg:text-left">
             <h4 className="font-semibold mb-4">Stay Updated</h4>
             <p className="text-sm text-background/60 mb-4">
               Subscribe to our newsletter for industry insights and updates.
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+            <form onSubmit={handleNewsletterSubmit} className="flex gap-2 max-w-sm mx-auto lg:mx-0">
               <Input
                 type="email"
                 placeholder="Your email"
@@ -116,7 +116,7 @@ const Footer = () => {
             </form>
 
             {/* Social Links */}
-            <div className="flex gap-3 mt-6">
+            <div className="flex justify-center lg:justify-start gap-3 mt-6">
               {footerContent.social.map((social, i) => (
                 <a
                   key={i}

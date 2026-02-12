@@ -43,7 +43,8 @@ const PackagesSection = () => {
                 "relative bg-card rounded-2xl p-6 border transition-all duration-300 h-full flex flex-col",
                 pkg.highlighted
                   ? "border-primary shadow-xl shadow-primary/10 scale-[1.02]"
-                  : "border-border shadow-sm hover:shadow-lg border-dashed"
+                  : "border-border shadow-sm hover:shadow-lg border-dashed",
+                "items-center text-center lg:items-start lg:text-left"
               )}
             >
               {/* Badge */}
@@ -84,7 +85,7 @@ const PackagesSection = () => {
               </p>
 
               {/* Features */}
-              <ul className="space-y-3 mb-6 flex-grow">
+              <ul className="space-y-3 mb-6 flex-grow flex flex-col items-center lg:items-start">
                 {pkg.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
                     <i className="fas fa-check text-primary mt-0.5 text-xs" />

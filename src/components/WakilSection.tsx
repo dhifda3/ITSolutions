@@ -34,7 +34,7 @@ const WakilSection = () => {
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-accent mb-4">
             {wakilContent.title}
-            </h2>
+          </h2>
           <p className="text-lg text-white/90">
             {wakilContent.subtitle}
           </p>
@@ -48,6 +48,7 @@ const WakilSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="flex flex-col items-center text-center lg:items-start lg:text-left"
           >
             <h3 className="text-2xl sm:text-3xl font-bold text-accent mb-6">
               {wakilContent.heading}
@@ -72,7 +73,7 @@ const WakilSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-[#F5F7EA] rounded-2xl p-6 border border-border shadow-sm hover:shadow-lg transition-all duration-300"
+                className="bg-[#F5F7EA] rounded-2xl p-6 border border-border shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center sm:items-start sm:text-left"
               >
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <i className={`fas ${benefit.icon} text-xl text-primary`} />
@@ -111,7 +112,7 @@ const WakilSection = () => {
               </span>
             </div>
             <div className="w-px h-4 bg-border hidden sm:block" />
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <i className="fas fa-clock text-primary" />
               <span className="text-sm text-muted-foreground">
                 Fast Processing

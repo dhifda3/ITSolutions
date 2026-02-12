@@ -51,12 +51,12 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (
       !formData.agencyName ||
       !formData.contactPerson ||
       !formData.email ||
-      !formData.phone 
+      !formData.phone
     ) {
       toast({
         title: "Please fill in all required fields",
@@ -65,7 +65,7 @@ const ContactSection = () => {
       });
       return;
     }
-  
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
@@ -75,9 +75,9 @@ const ContactSection = () => {
       });
       return;
     }
-  
+
     setIsSubmitting(true);
-  
+
     try {
       await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -94,13 +94,13 @@ const ContactSection = () => {
         },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
-  
+
       setIsSubmitted(true);
       toast({
         title: "Inquiry submitted!",
         description: "Our team will contact you shortly.",
       });
-  
+
     } catch (error) {
       console.error(error);
       toast({
@@ -109,10 +109,10 @@ const ContactSection = () => {
         variant: "destructive",
       });
     }
-  
+
     setIsSubmitting(false);
   };
-  
+
 
   const resetForm = () => {
     setFormData({
@@ -167,6 +167,7 @@ const ContactSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="flex flex-col items-center text-center lg:items-start lg:text-left"
           >
             <span className="badge-primary mb-4">
               <i className="fas fa-envelope" />
@@ -180,8 +181,8 @@ const ContactSection = () => {
             </p>
 
             {/* Contact Info Cards */}
-            <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-4 p-4 bg-card rounded-xl border border-border">
+            <div className="space-y-4 mb-8 w-full max-w-md mx-auto lg:mx-0">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 bg-card rounded-xl border border-border text-center sm:text-left">
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <i className="fas fa-clock text-primary" />
                 </div>
@@ -191,7 +192,7 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 bg-card rounded-xl border border-border">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 bg-card rounded-xl border border-border text-center sm:text-left">
                 <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
                   <i className="fas fa-headset text-accent" />
                 </div>
@@ -201,7 +202,7 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 bg-card rounded-xl border border-border">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 bg-card rounded-xl border border-border text-center sm:text-left">
                 <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
                   <i className="fas fa-shield-halved text-emerald-600" />
                 </div>
@@ -213,9 +214,9 @@ const ContactSection = () => {
             </div>
 
             {/* Direct Contact */}
-            <div className="p-6 rounded-2xl bg-primary text-primary-foreground">
-              <h4 className="font-semibold mb-4">Prefer to talk directly?</h4>
-              <div className="space-y-3">
+            <div className="p-6 rounded-2xl bg-primary text-primary-foreground w-full max-w-md mx-auto lg:mx-0">
+              <h4 className="font-semibold mb-4 text-center lg:text-left">Prefer to talk directly?</h4>
+              <div className="space-y-3 flex flex-col items-center lg:items-start">
                 <a href="tel:+2348001234567" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                   <i className="fas fa-phone" />
                   <span>+966 565809269</span>
@@ -226,7 +227,7 @@ const ContactSection = () => {
                 </a>
                 <a className="flex items-center gap-3">
                   <i className="fas fa-envelope" />
-                  <span>itsolutionglobal59@gmail.com</span>
+                  <span className="text-center sm:text-left">itsolutionglobal59@gmail.com</span>
                 </a>
               </div>
             </div>
@@ -361,10 +362,10 @@ const ContactSection = () => {
                 />
               </div>
 
-              <Button 
-                type="submit" 
-                variant="ctaPrimary" 
-                size="lg" 
+              <Button
+                type="submit"
+                variant="ctaPrimary"
+                size="lg"
                 className="w-full"
                 disabled={isSubmitting}
               >

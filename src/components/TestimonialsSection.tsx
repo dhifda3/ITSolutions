@@ -54,7 +54,7 @@ const TestimonialsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-primary-foreground/10 backdrop-blur-lg rounded-2xl p-6 border border-primary-foreground/20 flex flex-col h-full"
+              className="bg-primary-foreground/10 backdrop-blur-lg rounded-2xl p-6 border border-primary-foreground/20 flex flex-col items-center text-center md:items-start md:text-left h-full"
             >
 
 
@@ -79,7 +79,7 @@ const TestimonialsSection = () => {
               </blockquote>
 
               {/* Author */}
-              <div className="flex items-center gap-3 mt-auto">
+              <div className="flex flex-col items-center md:flex-row md:items-center gap-3 mt-auto">
                 <div className="w-10 h-10 rounded-full bg-primary-foreground/20 flex items-center justify-center text-sm font-bold">
                   {testimonial.author.split(' ').map(n => n[0]).join('')}
                 </div>

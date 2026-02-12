@@ -29,7 +29,7 @@ const ProcessSection = () => {
         <div className="relative">
           {/* Connection Line - Desktop */}
           <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {processContent.steps.map((step, index) => (
               <motion.div
@@ -40,9 +40,9 @@ const ProcessSection = () => {
                 transition={{ duration: 0.5, delay: index * 0.15 }}
                 className="relative"
               >
-                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-lg transition-all duration-300 h-full">
+                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-lg transition-all duration-300 h-full flex flex-col items-center text-center lg:items-start lg:text-left">
                   {/* Step Number */}
-                  <div className="flex items-center gap-4 mb-6">
+                  <div className="flex items-center justify-center lg:justify-start gap-4 mb-6">
                     <div className="relative">
                       <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl shadow-lg">
                         {step.number}
@@ -62,7 +62,7 @@ const ProcessSection = () => {
                   </p>
 
                   {/* Features */}
-                  <ul className="space-y-2">
+                  <ul className="space-y-2 flex flex-col items-center lg:items-start">
                     {step.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
                         <i className="fas fa-check text-primary text-xs" />

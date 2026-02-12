@@ -101,14 +101,14 @@ const Header = () => {
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block py-3 text-lg font-medium text-foreground hover:text-primary transition-colors border-b border-border"
+                      className="block py-3 text-lg font-medium text-foreground hover:text-primary transition-colors border-b border-border text-center"
                     >
                       {link.label}
                     </a>
                   ))}
                 </nav>
 
-                <div className="mt-8">
+                <div className="mt-8 flex justify-center">
                   <Button
                     variant="ctaPrimary"
                     size="lg"
