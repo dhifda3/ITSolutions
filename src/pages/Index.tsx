@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
@@ -13,19 +14,21 @@ import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 
 const Index = () => {
+  const [selectedPackage, setSelectedPackage] = useState<string>("");
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main>
         <HeroSection />
         <SolutionsSection />
-        <PackagesSection />
+        <PackagesSection onSelectPackage={setSelectedPackage} />
         <WakilSection />
         <ProcessSection />
         <TestimonialsSection />
         <FAQSection />
         <CTASection />
-        <ContactSection />
+        <ContactSection selectedPackage={selectedPackage} />
       </main>
       <Footer />
       <FloatingButtons />

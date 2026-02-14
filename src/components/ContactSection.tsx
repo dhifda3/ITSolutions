@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { contactContent } from "@/data/content";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
@@ -19,12 +20,28 @@ interface FormData {
   agencySize: string;
   services: string[];
   message: string;
+  selectedPackage: string;
 }
 
-const ContactSection = () => {
+interface FormErrors {
+  agencyName?: string;
+  contactPerson?: string;
+  email?: string;
+  phone?: string;
+  country?: string;
+  agencySize?: string;
+  terms?: string;
+}
+
+interface ContactSectionProps {
+  selectedPackage?: string;
+}
+
+const ContactSection = ({ selectedPackage = "" }: ContactSectionProps) => {
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [formData, setFormData] = useState<FormData>({
     agencyName: "",
     contactPerson: "",
@@ -33,11 +50,53 @@ const ContactSection = () => {
     country: "",
     agencySize: "",
     services: [],
-    message: ""
+    message: "",
+    selectedPackage: selectedPackage
   });
+
+  useEffect(() => {
+    if (selectedPackage) {
+      setFormData(prev => ({ ...prev, selectedPackage }));
+    }
+  }, [selectedPackage]);
+
+  const validateField = (field: keyof FormData, value: any): string | undefined => {
+    switch (field) {
+      case "agencyName":
+        if (!value) return "Agency name is required";
+        if (value.length < 2) return "Agency name is too short";
+        return undefined;
+      case "contactPerson":
+        if (!value) return "Contact person is required";
+        if (value.length < 3) return "Please enter your full name";
+        return undefined;
+      case "email":
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!value) return "Email is required";
+        if (!emailRegex.test(value)) return "Please enter a valid email address";
+        return undefined;
+      case "phone":
+        const phoneRegex = /^\+?[\d\s\-()]{8,20}$/;
+        if (!value) return "Phone number is required";
+        if (!phoneRegex.test(value)) return "Please enter a valid phone number";
+        return undefined;
+      case "country":
+        if (!value) return "Please select your country";
+        return undefined;
+      case "agencySize":
+        if (!value) return "Please select your agency size";
+        return undefined;
+      default:
+        return undefined;
+    }
+  };
 
   const handleInputChange = (field: keyof FormData, value: string | boolean | string[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear error for this field as user types
+    if (formErrors[field as keyof FormErrors]) {
+      setFormErrors(prev => ({ ...prev, [field]: undefined }));
+    }
   };
 
   const toggleService = (serviceId: string) => {
@@ -49,28 +108,29 @@ const ContactSection = () => {
     }));
   };
 
+  const validateForm = (): boolean => {
+    const errors: FormErrors = {};
+    let isValid = true;
+
+    (Object.keys(formData) as Array<keyof FormData>).forEach(key => {
+      const error = validateField(key, formData[key]);
+      if (error) {
+        errors[key as keyof FormErrors] = error;
+        isValid = false;
+      }
+    });
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (
-      !formData.agencyName ||
-      !formData.contactPerson ||
-      !formData.email ||
-      !formData.phone
-    ) {
+    if (!validateForm()) {
       toast({
-        title: "Please fill in all required fields",
-        description: "Make sure to complete all required fields and accept the terms.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      toast({
-        title: "Invalid email address",
-        description: "Please enter a valid email address.",
+        title: "Registration incomplete",
+        description: "Please check the highlighted fields and try again.",
         variant: "destructive",
       });
       return;
@@ -91,6 +151,7 @@ const ContactSection = () => {
           agency_size: formData.agencySize,
           services: formData.services.join(", "),
           message: formData.message,
+          selected_package: formData.selectedPackage || "Direct Inquiry",
         },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
@@ -123,8 +184,10 @@ const ContactSection = () => {
       country: "",
       agencySize: "",
       services: [],
-      message: ""
+      message: "",
+      selectedPackage: ""
     });
+    setFormErrors({});
     setIsSubmitted(false);
   };
 
@@ -240,7 +303,7 @@ const ContactSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <form onSubmit={handleSubmit} className="bg-card rounded-2xl p-6 sm:p-8 border border-border shadow-lg">
+            <form onSubmit={handleSubmit} className="bg-card rounded-2xl p-6 sm:p-8 border border-border shadow-lg" noValidate>
               <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
@@ -250,8 +313,9 @@ const ContactSection = () => {
                     placeholder="Your agency name"
                     value={formData.agencyName}
                     onChange={(e) => handleInputChange("agencyName", e.target.value)}
-                    required
+                    className={formErrors.agencyName ? "border-destructive focus-visible:ring-destructive" : ""}
                   />
+                  {formErrors.agencyName && <p className="text-destructive text-xs mt-1 font-medium">{formErrors.agencyName}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
@@ -261,8 +325,9 @@ const ContactSection = () => {
                     placeholder="Your full name"
                     value={formData.contactPerson}
                     onChange={(e) => handleInputChange("contactPerson", e.target.value)}
-                    required
+                    className={formErrors.contactPerson ? "border-destructive focus-visible:ring-destructive" : ""}
                   />
+                  {formErrors.contactPerson && <p className="text-destructive text-xs mt-1 font-medium">{formErrors.contactPerson}</p>}
                 </div>
               </div>
 
@@ -276,8 +341,9 @@ const ContactSection = () => {
                     placeholder="email@agency.com"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    required
+                    className={formErrors.email ? "border-destructive focus-visible:ring-destructive" : ""}
                   />
+                  {formErrors.email && <p className="text-destructive text-xs mt-1 font-medium">{formErrors.email}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
@@ -288,18 +354,19 @@ const ContactSection = () => {
                     placeholder="+234 800 000 0000"
                     value={formData.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
-                    required
+                    className={formErrors.phone ? "border-destructive focus-visible:ring-destructive" : ""}
                   />
+                  {formErrors.phone && <p className="text-destructive text-xs mt-1 font-medium">{formErrors.phone}</p>}
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 mb-4">
+              <div className="grid sm:grid-cols-2 gap-4 mb-6">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
                     Country *
                   </label>
                   <Select value={formData.country} onValueChange={(v) => handleInputChange("country", v)}>
-                    <SelectTrigger className="bg-background">
+                    <SelectTrigger className={cn("bg-background", formErrors.country ? "border-destructive focus:ring-destructive" : "")}>
                       <SelectValue placeholder="Select country" />
                     </SelectTrigger>
                     <SelectContent className="bg-popover">
@@ -310,13 +377,14 @@ const ContactSection = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                  {formErrors.country && <p className="text-destructive text-xs mt-1 font-medium">{formErrors.country}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Agency Size
+                    Agency Size *
                   </label>
                   <Select value={formData.agencySize} onValueChange={(v) => handleInputChange("agencySize", v)}>
-                    <SelectTrigger className="bg-background">
+                    <SelectTrigger className={cn("bg-background", formErrors.agencySize ? "border-destructive focus:ring-destructive" : "")}>
                       <SelectValue placeholder="Select size" />
                     </SelectTrigger>
                     <SelectContent className="bg-popover">
@@ -327,30 +395,45 @@ const ContactSection = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                  {formErrors.agencySize && <p className="text-destructive text-xs mt-1 font-medium">{formErrors.agencySize}</p>}
                 </div>
               </div>
 
-              <div className="mb-4">
+              {/* Selected Package Field */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Selected Package
+                </label>
+                <Input
+                  value={formData.selectedPackage}
+                  placeholder="Direct Inquiry (No package selected)"
+                  readOnly
+                  className="bg-muted text-muted-foreground cursor-not-allowed opacity-80"
+                />
+              </div>
+
+              <div className="mb-6">
                 <label className="block text-sm font-medium text-foreground mb-3">
                   Interested Services
                 </label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-3 p-4 bg-muted/20 rounded-xl border border-border/50">
                   {contactContent.services.map((service) => (
                     <label
                       key={service.id}
-                      className="flex items-center gap-2 cursor-pointer"
+                      className="flex items-center gap-3 cursor-pointer group hover:bg-white/50 p-1.5 rounded-lg transition-colors"
                     >
                       <Checkbox
                         checked={formData.services.includes(service.id)}
                         onCheckedChange={() => toggleService(service.id)}
+                        className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                       />
-                      <span className="text-sm">{service.label}</span>
+                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{service.label}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
-              <div className="mb-4">
+              <div className="mb-8">
                 <label className="block text-sm font-medium text-foreground mb-2">
                   Message
                 </label>
@@ -359,6 +442,7 @@ const ContactSection = () => {
                   rows={4}
                   value={formData.message}
                   onChange={(e) => handleInputChange("message", e.target.value)}
+                  className="resize-none focus-visible:ring-primary"
                 />
               </div>
 
@@ -366,17 +450,17 @@ const ContactSection = () => {
                 type="submit"
                 variant="ctaPrimary"
                 size="lg"
-                className="w-full"
+                className="w-full shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
                   <>
-                    <i className="fas fa-spinner fa-spin" />
+                    <i className="fas fa-spinner fa-spin mr-2" />
                     Submitting...
                   </>
                 ) : (
                   <>
-                    <i className="fas fa-paper-plane" />
+                    <i className="fas fa-paper-plane mr-2" />
                     Submit Inquiry
                   </>
                 )}

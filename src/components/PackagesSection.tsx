@@ -2,13 +2,25 @@ import { motion } from "framer-motion";
 import { packagesContent } from "@/data/content";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import PackageSelectionModal from "./PackageSelectionModal";
 
+interface PackagesSectionProps {
+  onSelectPackage: (packageName: string) => void;
+}
 
-const PackagesSection = () => {
+const PackagesSection = ({ onSelectPackage }: PackagesSectionProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPackageName, setSelectedPackageName] = useState("");
+
+  const handleSelectPackage = (packageName: string) => {
+    setSelectedPackageName(packageName);
+    onSelectPackage(packageName);
+    setIsModalOpen(true);
+  };
+
   return (
     <section id="packages" className="section-padding bg-[#F8F5EE] relative">
-
-      {/* Content */}
       <div className="container-custom">
         {/* Header */}
         <motion.div
@@ -22,9 +34,11 @@ const PackagesSection = () => {
             <i className="fas fa-box-open" />
             Our Packages
           </span>
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             {packagesContent.title}
           </h2>
+
           <p className="text-lg text-muted-foreground">
             {packagesContent.subtitle}
           </p>
@@ -40,20 +54,15 @@ const PackagesSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className={cn(
-                "relative bg-card rounded-2xl p-6 border transition-all duration-300 h-full flex flex-col",
-                pkg.highlighted
-                  ? "border-primary shadow-xl shadow-primary/10 scale-[1.02]"
-                  : "border-border shadow-sm hover:shadow-lg border-dashed",
+                "group relative bg-card rounded-2xl p-6 border border-border", // Default neutral border
+                "shadow-sm transition-all duration-300",
+                "hover:shadow-xl hover:shadow-primary/10 hover:border-primary hover:-translate-y-1",
+                "h-full flex flex-col",
                 "items-center text-center lg:items-start lg:text-left"
               )}
             >
               {/* Badge */}
-              <div className={cn(
-                "inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-4 w-fit",
-                pkg.highlighted
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-primary/10 text-primary"
-              )}>
+              <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-4 w-fit bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                 {pkg.tagline === "Perfect for Small/New Agencies" && "STARTER"}
                 {pkg.tagline === "For Established Agencies" && "GROWTH"}
                 {pkg.tagline === "For Market Leaders" && "PREMIUM"}
@@ -61,21 +70,20 @@ const PackagesSection = () => {
               </div>
 
               {/* Icon */}
-              <div className={cn(
-                "w-12 h-12 rounded-xl flex items-center justify-center mb-4",
-                pkg.highlighted ? "bg-primary/10" : "bg-primary/10"
-              )}>
-                <i className={`fas ${pkg.icon} text-xl text-primary`} />
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-muted group-hover:bg-primary/10 transition-colors duration-300">
+                <i className={`fas ${pkg.icon} text-xl text-muted-foreground group-hover:text-primary transition-colors duration-300`} />
               </div>
 
               {/* Title */}
               <h3 className="text-xl font-bold text-foreground mb-1">
                 {pkg.name.replace(" Package", "")}
               </h3>
-              <h4 className="text-xl font-bold text-foreground mb-2">Package</h4>
+              <h4 className="text-xl font-bold text-foreground mb-2">
+                Package
+              </h4>
 
               {/* Tagline */}
-              <p className="text-sm font-medium text-primary mb-3">
+              <p className="text-sm font-medium text-muted-foreground group-hover:text-primary mb-3 transition-colors duration-300">
                 {pkg.tagline}
               </p>
 
@@ -87,8 +95,11 @@ const PackagesSection = () => {
               {/* Features */}
               <ul className="space-y-3 mb-6 flex-grow flex flex-col items-center lg:items-start">
                 {pkg.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <i className="fas fa-check text-primary mt-0.5 text-xs" />
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2 text-sm text-muted-foreground"
+                  >
+                    <i className="fas fa-check text-muted-foreground group-hover:text-primary mt-0.5 text-xs transition-colors duration-300" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -96,11 +107,15 @@ const PackagesSection = () => {
 
               {/* CTA */}
               <Button
-                variant={pkg.highlighted ? "default" : "outline"}
-                className="w-full mt-auto"
+                className="w-full mt-auto bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground border-none group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
                 asChild
               >
-                <a href={pkg.cta.href}>
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    handleSelectPackage(pkg.name);
+                  }}
+                >
                   {pkg.cta.text}
                 </a>
               </Button>
@@ -108,6 +123,12 @@ const PackagesSection = () => {
           ))}
         </div>
       </div>
+
+      <PackageSelectionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        packageName={selectedPackageName}
+      />
     </section>
   );
 };
